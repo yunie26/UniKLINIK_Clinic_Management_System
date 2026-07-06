@@ -1,0 +1,493 @@
+<?php
+$staff_role = isset($_SESSION['staff_role'])
+    ? $_SESSION['staff_role']
+    : 'Clinic Assistant';
+
+$staff_display_name = isset($_SESSION['staff_name']) &&
+                      $_SESSION['staff_name'] !== ''
+    ? $_SESSION['staff_name']
+    : 'Staff';
+?>
+
+<script type="text/javascript">
+
+var pid = "none";
+
+function showhide(id){
+
+    var parent = document.getElementById(id);
+
+    var menu = parent.querySelector(".treeview-menu");
+    var arrow = parent.querySelector(".fa-angle-left");
+
+    if(pid !== "none" && pid !== id){
+
+        var oldParent = document.getElementById(pid);
+
+        if(oldParent){
+
+            var oldMenu = oldParent.querySelector(".treeview-menu");
+            var oldArrow = oldParent.querySelector(".fa-angle-left");
+
+            oldMenu.style.display = "none";
+            oldArrow.style.transform = "rotate(0deg)";
+
+            oldParent.classList.remove("active");
+
+        }
+    }
+
+    if(menu.style.display === "block"){
+
+        menu.style.display = "none";
+        arrow.style.transform = "rotate(0deg)";
+        parent.classList.remove("active");
+
+        pid = "none";
+
+    }
+    else{
+
+        menu.style.display = "block";
+        arrow.style.transform = "rotate(-90deg)";
+        parent.classList.add("active");
+
+        pid = id;
+
+    }
+
+}
+
+</script>
+
+<div class="sidenav">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="logo">
+
+                <span class="logo-box">
+                    U.n.i
+                </span>
+
+                <span class="logo-text">
+                    KLINIK
+                </span>
+
+            </div>
+
+            <div class="profile-circle">
+
+                <i class="fa fa-user-md"></i>
+
+            </div>
+
+            <p class="tagline">
+                <?php echo htmlspecialchars($staff_display_name, ENT_QUOTES, 'UTF-8'); ?>
+            </p>
+
+            <small style="
+                color:#94a3b8;
+                font-weight:700;
+                display:block;
+                margin-top:-10px;
+                margin-bottom:28px;
+                font-size:12px;
+                letter-spacing:0.5px;
+            ">
+                <?php echo htmlspecialchars($staff_role, ENT_QUOTES, 'UTF-8'); ?>
+            </small>
+
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="main-menu-item">
+
+            <a href="home_staff.php">
+
+                <i class="fa fa-home"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+        </div>
+
+        <?php if ($staff_role === 'Doctor') { ?>
+
+            <!-- PATIENT -->
+            <div class="main-menu-item">
+
+                <a href="manage_customer_staff.php">
+
+                    <i class="fa fa-user"></i>
+
+                    <span>Patient</span>
+
+                </a>
+
+            </div>
+
+            <!-- DOCTOR PRESCRIPTION -->
+            <div id="doctor_menu"
+                 class="main-menu-item"
+                 onclick="showhide(this.id);">
+
+                <a href="#">
+
+                    <i class="fa fa-stethoscope"></i>
+
+                    <span>Doctor Prescription</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu" style="display:none;">
+
+                    <li class="treeview">
+                        <a href="doctor_prescriptions.php">
+                            Create Prescription
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="doctor_prescription_history.php">
+                            Prescription History
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        <?php } elseif ($staff_role === 'Medical Assistant') { ?>
+
+            <!-- MEDICINE -->
+            <div id="medicine_menu"
+                 class="main-menu-item"
+                 onclick="showhide(this.id);">
+
+                <a href="#">
+
+                    <i class="fa fa-medkit"></i>
+
+                    <span>Medicine</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu" style="display:none;">
+
+                    <li class="treeview">
+                        <a href="add_medicine_staff.php">
+                            Add Medicine
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="manage_medicine_staff.php">
+                            Manage Medicine
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="manage_medicine_stock_staff.php">
+                            Medicine Stock
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- SUPPLIER -->
+            <div id="supplier_menu"
+                 class="main-menu-item"
+                 onclick="showhide(this.id);">
+
+                <a href="#">
+
+                    <i class="fa fa-truck"></i>
+
+                    <span>Supplier</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu" style="display:none;">
+
+                    <li class="treeview">
+                        <a href="add_supplier_staff.php">
+                            Add Supplier
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="manage_supplier_staff.php">
+                            Manage Supplier
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- ORDERING -->
+            <div id="ordering_menu"
+                 class="main-menu-item"
+                 onclick="showhide(this.id);">
+
+                <a href="#">
+
+                    <i class="fa fa-shopping-cart"></i>
+
+                    <span>Ordering</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu" style="display:none;">
+
+                    <li class="treeview">
+                        <a href="add_purchase_staff.php">
+                            Add Ordering
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="manage_purchase_staff.php">
+                            Manage Ordering
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- REPORT -->
+            <div id="report_menu"
+                 class="main-menu-item"
+                 onclick="showhide(this.id);">
+
+                <a href="#">
+
+                    <i class="fa fa-line-chart"></i>
+
+                    <span>Report</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu" style="display:none;">
+
+                    <li class="treeview">
+                        <a href="sales_report_staff.php">
+                            Sales Report
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="purchase_report_staff.php">
+                            Ordering Report
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        <?php } else { ?>
+
+            <!-- PATIENT -->
+            <div id="patient_menu"
+                 class="main-menu-item"
+                 onclick="showhide(this.id);">
+
+                <a href="#">
+
+                    <i class="fa fa-user"></i>
+
+                    <span>Patient</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu" style="display:none;">
+
+                    <li class="treeview">
+                        <a href="add_customer_staff.php">
+                            Add Patient
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="manage_customer_staff.php">
+                            Manage Patient
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- COUNTER PRESCRIPTIONS -->
+            <div class="main-menu-item">
+
+                <a href="counter_prescriptions.php">
+
+                    <i class="fa fa-medkit"></i>
+
+                    <span>Counter Prescriptions</span>
+
+                </a>
+
+            </div>
+
+            <!-- RECEIPT -->
+            <div id="receipt_menu"
+                 class="main-menu-item"
+                 onclick="showhide(this.id);">
+
+                <a href="#">
+
+                    <i class="fa fa-file-text"></i>
+
+                    <span>Receipt</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu" style="display:none;">
+
+                    <li class="treeview">
+                        <a href="new_invoice_staff.php">
+                            New Receipt
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="manage_invoice_staff.php">
+                            Manage Receipt
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        <?php } ?>
+
+        <!-- CLAIM OT -->
+        <div id="ot_menu"
+             class="main-menu-item"
+             onclick="showhide(this.id);">
+
+            <a href="#">
+
+                <i class="fa fa-clock-o"></i>
+
+                <span>Claim OT</span>
+
+                <span class="pull-right-container">
+
+                    <i class="fa fa-angle-left pull-right"></i>
+
+                </span>
+
+            </a>
+
+            <ul class="treeview-menu" style="display:none;">
+
+                <li class="treeview">
+                    <a href="submit_ot.php">
+                        Submit OT Request
+                    </a>
+                </li>
+
+                <li class="treeview">
+                    <a href="staff_ot_requests.php">
+                        View OT Status
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- LEAVE -->
+        <div id="leave_menu"
+             class="main-menu-item"
+             onclick="showhide(this.id);">
+
+            <a href="#">
+
+                <i class="fa fa-calendar"></i>
+
+                <span>Leave</span>
+
+                <span class="pull-right-container">
+
+                    <i class="fa fa-angle-left pull-right"></i>
+
+                </span>
+
+            </a>
+
+            <ul class="treeview-menu" style="display:none;">
+
+                <li class="treeview">
+                    <a href="apply_leave.php">
+                        Apply Leave
+                    </a>
+                </li>
+
+                <li class="treeview">
+                    <a href="view_leave_status.php">
+                        Leave Status
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>

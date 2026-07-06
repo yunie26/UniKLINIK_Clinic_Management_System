@@ -1,0 +1,465 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+<style>
+  body {
+    background: #f4f7fb;
+  }
+
+  .staff-form-container {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+  }
+
+  .staff-card {
+    width: 100%;
+    max-width: 1100px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 35px;
+    border: 1px solid #edf2f7;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  }
+
+  .staff-card-header {
+    margin-bottom: 30px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .staff-card-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin-bottom: 6px;
+  }
+
+  .staff-card-header h3 i {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #e8f4fa;
+    color: #2c7da0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .staff-card-header p {
+    margin: 0;
+    color: #7b8ba1;
+    font-size: 14px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .form-group {
+    flex: 1;
+    min-width: 220px;
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .full-width {
+    flex: 100%;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e3a5f;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  label i {
+    color: #2c7da0;
+    font-size: 13px;
+  }
+
+  .required-star::after {
+    content: "*";
+    color: #dc3545;
+    margin-left: 3px;
+  }
+
+  .form-control {
+    width: 100%;
+    height: 50px;
+    border-radius: 14px;
+    border: 1px solid #dbe4ee;
+    background: #f9fbfd;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #334155;
+    transition: all 0.25s ease;
+  }
+
+  textarea.form-control {
+    min-height: 110px;
+    padding-top: 14px;
+    resize: none;
+  }
+
+  .form-control:focus {
+    border-color: #2c7da0;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(44, 125, 160, 0.12);
+    outline: none;
+  }
+
+  .form-control:hover {
+    background: #ffffff;
+  }
+
+  .form-control::placeholder {
+    color: #9aa9bd;
+  }
+
+  .password-eye {
+    position: absolute;
+    top: 44px;
+    right: 16px;
+    cursor: pointer;
+    color: #7b8ba1;
+    font-size: 17px;
+    transition: 0.2s ease;
+  }
+
+  .password-eye:hover {
+    color: #2c7da0;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background: #edf2f7;
+    margin: 10px 0 25px;
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .btn-primary-custom {
+    background: linear-gradient(135deg, #1f6392, #2c7da0);
+    border: none;
+    color: white;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(44, 125, 160, 0.2);
+  }
+
+  .btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(44, 125, 160, 0.3);
+  }
+
+  #staff_acknowledgement {
+    margin-top: 18px;
+    text-align: center;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .staff-card {
+      padding: 25px 20px;
+    }
+
+    .form-row {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .staff-card-header h3 {
+      font-size: 22px;
+    }
+  }
+</style>
+
+<div class="staff-form-container">
+
+  <div class="staff-card">
+
+    <div class="staff-card-header">
+      <h3>
+        <i class="fas fa-user-plus"></i>
+        Add New Staff
+      </h3>
+      <p>Please fill all the required fields with staff information</p>
+    </div>
+
+    <!-- Full Name + Gender -->
+    <div class="form-row">
+
+      <div class="form-group" style="flex:2;">
+        <label for="staff_name">
+          <i class="fas fa-user"></i>
+          Full Name
+          <span class="required-star"></span>
+        </label>
+
+        <input type="text"
+               class="form-control"
+               id="staff_name"
+               placeholder="Enter full name">
+      </div>
+
+      <div class="form-group">
+        <label for="staff_gender">
+          <i class="fas fa-venus-mars"></i>
+          Gender
+        </label>
+
+        <select class="form-control" id="staff_gender">
+          <option value="">-- Select Gender --</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- DOB + Phone + Email -->
+    <div class="form-row">
+
+      <div class="form-group">
+        <label for="staff_dob">
+          <i class="fas fa-calendar-alt"></i>
+          Date of Birth
+        </label>
+
+        <input type="date"
+               class="form-control"
+               id="staff_dob">
+      </div>
+
+      <div class="form-group">
+        <label for="staff_contact_number">
+          <i class="fas fa-phone"></i>
+          Phone Number
+          <span class="required-star"></span>
+        </label>
+
+        <input type="text"
+               class="form-control"
+               id="staff_contact_number"
+               placeholder="Enter phone number">
+      </div>
+
+      <div class="form-group">
+        <label for="staff_email">
+          <i class="fas fa-envelope"></i>
+          Email
+          <span class="required-star"></span>
+        </label>
+
+        <input type="email"
+               class="form-control"
+               id="staff_email"
+               placeholder="Enter email address">
+      </div>
+
+    </div>
+
+    <!-- Role + Status -->
+    <div class="form-row">
+
+      <div class="form-group">
+        <label for="staff_role">
+          <i class="fas fa-briefcase"></i>
+          Role
+        </label>
+
+        <select class="form-control" id="staff_role">
+          <option value="">-- Select Role --</option>
+          <option value="Doctor">Doctor</option>
+          <option value="Medical Assistant">Medical Assistant</option>
+          <option value="Clinic Assistant">Clinic Assistant</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="staff_status">
+          <i class="fas fa-toggle-on"></i>
+          Status
+        </label>
+
+        <select class="form-control" id="staff_status">
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Address -->
+    <div class="form-row">
+
+      <div class="form-group full-width">
+        <label for="staff_address">
+          <i class="fas fa-map-marker-alt"></i>
+          Address
+        </label>
+
+        <textarea class="form-control"
+                  id="staff_address"
+                  placeholder="Enter address"></textarea>
+      </div>
+
+    </div>
+
+    <!-- Password -->
+    <div class="form-row">
+
+      <div class="form-group">
+        <label for="staff_password">
+          <i class="fas fa-lock"></i>
+          Password
+          <span class="required-star"></span>
+        </label>
+
+        <input type="password"
+               class="form-control"
+               id="staff_password"
+               placeholder="Enter password">
+
+        <i class="bi bi-eye-slash password-eye"
+           onclick="togglePassword('staff_password', this)"></i>
+      </div>
+
+      <div class="form-group">
+        <label for="staff_confirm_password">
+          <i class="fas fa-lock"></i>
+          Confirm Password
+          <span class="required-star"></span>
+        </label>
+
+        <input type="password"
+               class="form-control"
+               id="staff_confirm_password"
+               placeholder="Confirm password">
+
+        <i class="bi bi-eye-slash password-eye"
+           onclick="togglePassword('staff_confirm_password', this)"></i>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- Button -->
+    <div class="button-wrapper">
+
+      <button type="button"
+              class="btn-primary-custom"
+              onclick="addStaff()">
+
+        <i class="fas fa-save"></i>
+        ADD STAFF
+
+      </button>
+
+    </div>
+
+    <div id="staff_acknowledgement"></div>
+
+  </div>
+
+</div>
+
+<script>
+  function togglePassword(fieldId, icon) {
+
+    let field = document.getElementById(fieldId);
+
+    if (field.type === "password") {
+
+      field.type = "text";
+      icon.classList.replace("bi-eye-slash", "bi-eye");
+
+    } else {
+
+      field.type = "password";
+      icon.classList.replace("bi-eye", "bi-eye-slash");
+
+    }
+  }
+
+  function addStaff() {
+
+    const name = $("#staff_name").val().trim();
+    const contactNumber = $("#staff_contact_number").val().trim();
+    const email = $("#staff_email").val().trim();
+    const password = $("#staff_password").val();
+    const confirmPassword = $("#staff_confirm_password").val();
+
+    if (!name || !contactNumber || !email || !password || !confirmPassword) {
+
+      $("#staff_acknowledgement")
+        .removeClass("text-success")
+        .addClass("text-danger")
+        .html("All required fields must be filled out!");
+
+      return;
+    }
+
+    if (password !== confirmPassword) {
+
+      $("#staff_acknowledgement")
+        .removeClass("text-success")
+        .addClass("text-danger")
+        .html("Passwords do not match!");
+
+      return;
+    }
+
+    $.post("php/add_new_staff.php", {
+
+      name: $("#staff_name").val(),
+      gender: $("#staff_gender").val(),
+      dob: $("#staff_dob").val(),
+      address: $("#staff_address").val(),
+      contact_number: $("#staff_contact_number").val(),
+      email: $("#staff_email").val(),
+      role: $("#staff_role").val(),
+      status: $("#staff_status").val(),
+      password: $("#staff_password").val(),
+      confirm_password: $("#staff_confirm_password").val()
+
+    }, function (data) {
+
+      $("#staff_acknowledgement")
+        .removeClass("text-danger")
+        .addClass("text-success")
+        .html(data);
+
+    });
+  }
+</script>

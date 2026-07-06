@@ -1,0 +1,304 @@
+<!-- Medicine Form - Redesigned with same card style -->
+<style>
+    /* Same design styles as patient form - does NOT affect sidebar */
+    .medicine-form-container {
+        font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+    
+    /* White card/box styling */
+    .medicine-card {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        padding: 1.5rem 2rem 2rem 2rem;
+        margin-bottom: 1rem;
+        transition: all 0.2s ease;
+        border: 1px solid #eef2f6;
+        margin-left: auto;
+        margin-right: 0;
+        width: 100%;
+        max-width: 95%;
+    }
+    
+    /* Card header styling */
+    .medicine-card-header {
+        margin-bottom: 1.75rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f0f2f5;
+    }
+    
+    .medicine-card-header h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1a4b6e;
+        margin: 0 0 0.25rem 0;
+    }
+    
+    .medicine-card-header p {
+        font-size: 0.8rem;
+        color: #6c86a3;
+        margin: 0;
+    }
+    
+    .medicine-form-container .form-group {
+        margin-bottom: 1.25rem;
+        position: relative;
+    }
+    
+    .medicine-form-container label {
+        font-weight: 600;
+        font-size: 0.8rem;
+        letter-spacing: 0.3px;
+        color: #1a4b6e;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-transform: uppercase;
+    }
+    
+    .medicine-form-container label i {
+        color: #2c7da0;
+        width: 16px;
+        font-size: 0.75rem;
+    }
+    
+    .medicine-form-container .form-control,
+    .medicine-form-container input,
+    .medicine-form-container textarea,
+    .medicine-form-container select {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        background: #fafbfc;
+    }
+    
+    .medicine-form-container .form-control:focus {
+        border-color: #2c7da0;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(44,125,160,0.1);
+        outline: none;
+    }
+    
+    .medicine-form-container .form-control:hover {
+        border-color: #bdd3e8;
+        background: #ffffff;
+    }
+    
+    .medicine-form-container .btn-primary-custom {
+        background: linear-gradient(135deg, #1f6392 0%, #2c7da0 100%);
+        border: none;
+        padding: 12px 32px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 40px;
+        color: white;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(28,85,120,0.2);
+    }
+    
+    .medicine-form-container .btn-primary-custom:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(28,85,120,0.3);
+        background: linear-gradient(135deg, #155579 0%, #236b8e 100%);
+    }
+    
+    .medicine-form-container .btn-primary-custom:active {
+        transform: translateY(0px);
+    }
+    
+    .medicine-form-container code.text-danger {
+        font-size: 0.65rem;
+        font-weight: 500;
+        background: #fff5f5;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 5px;
+        display: inline-block;
+    }
+    
+    .medicine-form-container #medicine_acknowledgement {
+        padding: 10px 15px;
+        border-radius: 40px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .medicine-form-container .required-star:after {
+        content: "*";
+        color: #dc3545;
+        margin-left: 4px;
+        font-size: 0.75rem;
+    }
+    
+    .medicine-form-container hr {
+        margin: 1.25rem 0;
+        border: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+    }
+    
+    /* Button wrapper - CENTERED */
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        padding-top: 0.5rem;
+    }
+    
+    /* Add new supplier link styling */
+    .add-supplier-link {
+        color: #2c7da0;
+        font-weight: 600;
+        font-size: 0.85rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        margin-bottom: 0.5rem;
+    }
+    
+    .add-supplier-link:hover {
+        color: #1a5a7a;
+        text-decoration: underline;
+    }
+    
+    /* Supplier suggestions dropdown */
+    #supplier_suggestions {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+    
+    #supplier_suggestions .list-group-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        border: none;
+        border-bottom: 1px solid #f0f2f5;
+    }
+    
+    #supplier_suggestions .list-group-item:hover {
+        background-color: #f0f7fc;
+    }
+    
+    /* Placeholder styling */
+    .medicine-form-container input::placeholder,
+    .medicine-form-container textarea::placeholder {
+        color: #a0b8cc;
+        font-size: 0.85rem;
+        font-weight: 400;
+    }
+</style>
+
+<div class="medicine-form-container">
+    <div class="medicine-card">
+        
+        <!-- Card header -->
+        <div class="medicine-card-header">
+            <h3><i class="fas fa-capsules" style="margin-right: 10px; color: #2c7da0;"></i> Add New Medicine</h3>
+            <p>Please fill all the required fields with medicine information</p>
+        </div>
+        
+        <!-- Medicine Name & Packing (side by side) -->
+        <div class="row col col-md-12" style="display: flex; flex-wrap: wrap; gap: 15px;">
+            <div class="col col-md-8 form-group" style="flex: 2; min-width: 200px;">
+                <label for="medicine_name">
+                    <i class="fas fa-pills"></i> Medicine Name <span class="required-star"></span>
+                </label>
+                <input type="text" class="form-control" id="medicine_name" placeholder="Medicine Name" onblur="notNull(this.value, 'medicine_name_error');">
+                <code class="text-danger small font-weight-bold float-right" id="medicine_name_error" style="display: none;"></code>
+            </div>
+            <div class="col col-md-4 form-group" style="flex: 1; min-width: 150px;">
+                <label for="packing">
+                    <i class="fas fa-box"></i> Packing
+                </label>
+                <input type="text" class="form-control" id="packing" placeholder="e.g. 10 TAB / 100 ML" onblur="notNull(this.value, 'pack_error');">
+                <code class="text-danger small font-weight-bold float-right" id="pack_error" style="display: none;"></code>
+            </div>
+        </div>
+
+        <!-- Generic Name -->
+        <div class="row col col-md-12">
+            <div class="col col-md-12 form-group">
+                <label for="generic_name">
+                    <i class="fas fa-flask"></i> Generic Name
+                </label>
+                <input type="text" class="form-control" id="generic_name" placeholder="Generic Name" onblur="notNull(this.value, 'generic_name_error');">
+                <code class="text-danger small font-weight-bold float-right" id="generic_name_error" style="display: none;"></code>
+            </div>
+        </div>
+
+        <!-- Supplier Name with suggestions -->
+        <div class="row col col-md-12">
+            <div class="col col-md-12 form-group" style="position: relative;">
+                <label for="suppliers_name">
+                    <i class="fas fa-truck"></i> Supplier
+                </label>
+                <input id="suppliers_name" type="text" class="form-control" placeholder="Supplier Name" name="suppliers_name" onkeyup="showSuggestions(this.value, 'supplier');">
+                <code class="text-danger small font-weight-bold float-right" id="supplier_name_error" style="display: none;"></code>
+                <div id="supplier_suggestions" class="list-group position-absolute" style="z-index: 1000; width: 100%; overflow: auto; max-height: 200px; display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Expiry Date, Quantity, MRP (3 columns) -->
+        <div class="row col col-md-12" style="display: flex; flex-wrap: wrap; gap: 15px;">
+            <div class="col col-md-4 form-group" style="flex: 1; min-width: 120px;">
+                <label for="expiry_date">
+                    <i class="fas fa-calendar-alt"></i> Expiry Date
+                </label>
+                <input type="text" class="form-control" id="expiry_date" placeholder="MM/YY" onblur="checkExpiry(this.value, 'expiry_date_error');">
+                <code id="expiry_date_error" class="text-danger small font-weight-bold"></code>
+            </div>
+
+            <div class="col col-md-4 form-group" style="flex: 1; min-width: 120px;">
+                <label for="quantity">
+                    <i class="fas fa-cubes"></i> Quantity
+                </label>
+                <input type="number" class="form-control" id="quantity" placeholder="Quantity" onkeyup="checkQuantity(this.value, 'quantity_error');">
+                <code id="quantity_error" class="text-danger small font-weight-bold"></code>
+            </div>
+
+            <div class="col col-md-4 form-group" style="flex: 1; min-width: 120px;">
+                <label for="mrp">
+                    <i class="fas fa-tag"></i> Price (RM)
+                </label>
+                <input type="number" class="form-control" id="mrp" placeholder="RM" onkeyup="checkValue(this.value, 'mrp_error');">
+                <code id="mrp_error" class="text-danger small font-weight-bold"></code>
+            </div>
+        </div>
+
+        <!-- Add New Supplier Link -->
+        <div class="row col col-md-12">
+            <div class="col col-md-12">
+                <div class="add-supplier-link" onclick="document.getElementById('add_new_supplier_model').style.display = 'block';">
+                    <i class="fas fa-plus-circle"></i> Add New Supplier
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+
+        <!-- ADD Button - CENTERED -->
+        <div class="button-wrapper">
+            <button class="btn btn-primary-custom" onclick="addMedicine();">
+                <i class="fas fa-save"></i> ADD MEDICINE
+            </button>
+        </div>
+        
+        <!-- Result message -->
+        <div id="medicine_acknowledgement" class="col-md-12 text-center mt-3" style="font-family: sans-serif;"></div>
+        
+    </div>
+</div>
+
+<!-- Font Awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
