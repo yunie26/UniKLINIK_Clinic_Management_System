@@ -1,0 +1,139 @@
+body{
+  background:#f4f7fb;
+  font-family:'Segoe UI',sans-serif;
+}
+
+.container-fluid{
+  margin-left:17%;
+  width:83%;
+  padding:25px;
+}
+
+.container{
+  max-width:100%;
+}
+
+/* DASHBOARD CARD */
+
+.dashboard-card{
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  border:1px solid #edf2f7;
+  box-shadow:0 4px 18px rgba(0,0,0,0.04);
+  transition:0.25s ease;
+  cursor:pointer;
+  height:100%;
+}
+
+.dashboard-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card-title-small{
+  color:#64748b;
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.card-number{
+  font-size:34px;
+  font-weight:700;
+  color:#1e293b;
+}
+
+.card-icon{
+  width:58px;
+  height:58px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+}
+
+/* REPORT */
+
+.todays-report{
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  border:1px solid #edf2f7;
+  box-shadow:0 4px 18px rgba(0,0,0,0.04);
+  height:100%;
+}
+
+.todays-report h5{
+  font-weight:700;
+  margin-bottom:20px;
+  color:#1e293b;
+}
+
+.todays-report table{
+  margin:0;
+}
+
+.todays-report th{
+  padding:16px !important;
+  font-size:14px;
+}
+
+/* QUICK ACTION */
+
+.quick-card{
+  background:#fff;
+  border-radius:20px;
+  padding:30px 20px;
+  text-align:center;
+  border:1px solid #edf2f7;
+  box-shadow:0 4px 18px rgba(0,0,0,0.04);
+  transition:0.25s ease;
+  cursor:pointer;
+  height:100%;
+}
+
+.quick-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.quick-icon{
+  width:65px;
+  height:65px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  font-size:26px;
+}
+
+.quick-card h5{
+  margin-top:18px;
+  font-size:15px;
+  font-weight:600;
+  color:#334155;
+}
+
+hr{
+  border-top:1px solid #e2e8f0;
+  margin:30px 0;
+}
+
+@media(max-width:768px){
+
+  .container-fluid{
+    margin-left:0;
+    width:100%;
+    padding:15px;
+  }
+
+}
